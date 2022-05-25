@@ -1,11 +1,12 @@
 import React from 'react';
-import {SafeAreaView, Text, View} from 'react-native';
+import {SafeAreaView, StatusBar} from 'react-native';
 import SignIn from './pages/SignIn';
 
 const App = () => {
   return (
-    <SafeAreaView>
+    <SafeAreaView style={{flex: 1}}>
       <SignIn />
+      <StatusBar backgroundColor="transparent" translucent />
     </SafeAreaView>
   );
 };
