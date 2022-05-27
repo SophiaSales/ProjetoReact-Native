@@ -1,12 +1,12 @@
 import React from 'react';
 import {SafeAreaView, StatusBar} from 'react-native';
-import SignIn from './pages/SignIn';
+import {Routes} from './routes';
 
 const App = () => {
   return (
     <SafeAreaView style={{flex: 1}}>
-      <SignIn />
-      <StatusBar backgroundColor="transparent" translucent />
+      <Routes />
+      <StatusBar backgroundColor="#A796ff" translucent />
     </SafeAreaView>
   );
 };
