@@ -5,6 +5,8 @@ import {
 } from '@react-navigation/bottom-tabs';
 import {Requests} from '../pages/Requests';
 import {Registry} from '../pages/Registry';
+import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
+import {theme} from '../theme';
 
 export type propsBottomTab = {
   Registry: undefined;
@@ -16,16 +18,32 @@ const Stack = createBottomTabNavigator<propsBottomTab>();
 
 export function TabRoutes() {
   return (
-    <Stack.Navigator>
+    <Stack.Navigator
+      screenOptions={{
+        tabBarActiveTintColor: theme.colors.purple,
+        tabBarInactiveTintColor: theme.colors.gray,
+      }}>
       <Stack.Screen
         name="Registry"
         component={Registry}
-        options={{headerShown: false}}
+        options={{
+          headerShown: false,
+          tabBarLabel: 'Registro',
+          tabBarIcon: ({color, size}) => (
+            <MaterialIcons name="add" color={color} size={size} />
+          ),
+        }}
       />
       <Stack.Screen
         name="Requests"
         component={Requests}
-        options={{headerShown: false}}
+        options={{
+          headerShown: false,
+          tabBarLabel: 'Pedidos',
+          tabBarIcon: ({color, size}) => (
+            <MaterialIcons name="article" color={color} size={size} />
+          ),
+        }}
       />
     </Stack.Navigator>
   );
