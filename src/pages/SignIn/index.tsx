@@ -5,8 +5,7 @@ import {Input} from '../../components/Input';
 import {styles} from './styles';
 import {useNavigation} from '@react-navigation/native';
 
-import {propsStack} from '../../routes';
-import {Requests} from '../Requests';
+import {propsStack} from '../../routes/stack.routes';
 
 export function SignIn() {
   const [usuario, setUsuario] = useState('');
@@ -19,7 +18,7 @@ export function SignIn() {
     if (user === usuario && segre === senha) {
       navigation.reset({
         index: 0,
-        routes: [{name: 'Requests'}],
+        routes: [{name: 'TabRoutes'}],
       });
     }
   };
