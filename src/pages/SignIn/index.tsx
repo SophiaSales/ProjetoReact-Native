@@ -1,7 +1,5 @@
 import React, {useState} from 'react';
-import {View, Text} from 'react-native';
-import {Button} from '../../components/Button';
-import {Input} from '../../components/Input';
+import {View, Text, TouchableOpacity, TextInput} from 'react-native';
 import {styles} from './styles';
 import {useNavigation} from '@react-navigation/native';
 
@@ -26,13 +24,18 @@ export function SignIn() {
     <View style={styles.container}>
       <View style={styles.box}>
         <Text style={styles.title}> Seja Bem Vindo de Volta</Text>
-        <Input placeholder="Usuario" onChangeText={text => setUsuario(text)} />
-        <Input
+        <TextInput
+          style={styles.input}
+          placeholder="Usuario"
+          onChangeText={text => setUsuario(text)}></TextInput>
+        <TextInput
+          style={styles.input}
           secureTextEntry
           placeholder="Senha"
-          onChangeText={text => setSenha(text)}
-        />
-        <Button onPress={nextPage} />
+          onChangeText={text => setSenha(text)}></TextInput>
+        <TouchableOpacity style={styles.botton} onPress={nextPage}>
+          <Text style={styles.bottonTitle}>Login</Text>
+        </TouchableOpacity>
       </View>
     </View>
   );

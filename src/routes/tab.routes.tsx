@@ -30,7 +30,7 @@ export function TabRoutes() {
           headerShown: false,
           tabBarLabel: 'Registro',
           tabBarIcon: ({color, size}) => (
-            <MaterialIcons name="add" color={color} size={size} />
+            <MaterialIcons name="post-add" color={color} size={size} />
           ),
         }}
       />
