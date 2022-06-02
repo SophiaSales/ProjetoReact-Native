@@ -20,8 +20,12 @@ export function TabRoutes() {
   return (
     <Stack.Navigator
       screenOptions={{
-        tabBarActiveTintColor: theme.colors.purple,
+        tabBarActiveTintColor: theme.colors.purpleDark,
         tabBarInactiveTintColor: theme.colors.gray,
+        tabBarStyle: {
+          paddingBottom: 5,
+          paddingTop: 5,
+        },
       }}>
       <Stack.Screen
         name="Registry"

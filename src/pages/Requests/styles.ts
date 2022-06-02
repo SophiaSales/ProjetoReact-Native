@@ -5,11 +5,12 @@ export const styles = StyleSheet.create({
     container: {
         flex: 1,
         alignItems: 'center',
-        justifyContent: 'center'
+        backgroundColor: theme.colors.smoke
     },
     title: {
-        fontSize: 20,
+        fontSize: 23,
         color: theme.colors.purpleDark,
-        marginBottom: 600,
+        marginTop: 100,
+        marginBottom: 10
     }
 });
