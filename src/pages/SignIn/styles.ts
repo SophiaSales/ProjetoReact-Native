@@ -18,7 +18,7 @@ export const styles = StyleSheet.create({
         justifyContent: 'center',
     },
     title: {
-        fontSize: 20,
+        fontSize: 21,
         color: 'black',
         marginBottom: 50,
     },

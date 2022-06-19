@@ -12,7 +12,7 @@ export function SignIn() {
 
   const segre = '1234';
   const user = 'adm';
-  const nextPage = () => {
+  const logged = () => {
     if (user === usuario && segre === senha) {
       navigation.reset({
         index: 0,
@@ -23,7 +23,7 @@ export function SignIn() {
   return (
     <View style={styles.container}>
       <View style={styles.box}>
-        <Text style={styles.title}> Seja Bem Vindo de Volta</Text>
+        <Text style={styles.title}> Seja Bem Vindo ao SGPA</Text>
         <TextInput
           style={styles.input}
           placeholder="Usuario"
@@ -33,7 +33,7 @@ export function SignIn() {
           secureTextEntry
           placeholder="Senha"
           onChangeText={text => setSenha(text)}></TextInput>
-        <TouchableOpacity style={styles.botton} onPress={nextPage}>
+        <TouchableOpacity style={styles.botton} onPress={logged}>
           <Text style={styles.bottonTitle}>Login</Text>
         </TouchableOpacity>
       </View>
