@@ -3,10 +3,10 @@ import {
   createBottomTabNavigator,
   BottomTabNavigationProp,
 } from '@react-navigation/bottom-tabs';
-import {Requests} from '../pages/Requests';
-import {Registry} from '../pages/Registry';
+import {Requests} from '../screens/Requests';
+import {Registry} from '../screens/Registry';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
-import {theme} from '../theme';
+import themes from '../theme/themes';
 
 export type propsBottomTab = {
   Registry: undefined;
@@ -20,8 +20,8 @@ export function TabRoutes() {
   return (
     <Stack.Navigator
       screenOptions={{
-        tabBarActiveTintColor: theme.colors.purpleDark,
-        tabBarInactiveTintColor: theme.colors.gray,
+        tabBarActiveTintColor: themes.COLORS.PRIMARY2,
+        tabBarInactiveTintColor: themes.COLORS.INPUT1,
         tabBarStyle: {
           paddingBottom: 5,
           paddingTop: 5,

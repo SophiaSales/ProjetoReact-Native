@@ -3,7 +3,7 @@ import {
   createNativeStackNavigator,
   NativeStackNavigationProp,
 } from '@react-navigation/native-stack';
-import {SignIn} from '../pages/SignIn';
+import {SignIn} from '../screens/SignIn';
 import {TabRoutes} from './tab.routes';
 
 export type propsNavigation = {
