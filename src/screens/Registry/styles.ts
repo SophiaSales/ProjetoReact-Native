@@ -28,10 +28,11 @@ export const Input = styled.TextInput`
 
 export const InputRegistry = styled.TextInput`
     width: 350px;
-    height: 90px;
+    height: 95px;
     border-color: ${({ theme }) => theme.COLORS.INPUT1};
     background-color: ${({ theme }) => theme.COLORS.INPUT2};
     padding-left: 12px;
+    padding-bottom: 40px;
     padding-top: 10px;
     border-radius: 3px;
     border-width: 1px;
