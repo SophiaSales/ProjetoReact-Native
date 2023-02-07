@@ -3,14 +3,14 @@ import {
   createBottomTabNavigator,
   BottomTabNavigationProp,
 } from '@react-navigation/bottom-tabs';
-import {Requests} from '../screens/Requests';
+import {Order} from '../screens/Order';
 import {Registry} from '../screens/Registry';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import themes from '../theme/themes';
 
 export type propsBottomTab = {
   Registry: undefined;
-  Requests: undefined;
+  Order: undefined;
 };
 export type propsStack = BottomTabNavigationProp<propsBottomTab>;
 
@@ -39,8 +39,8 @@ export function TabRoutes() {
         }}
       />
       <Stack.Screen
-        name="Requests"
-        component={Requests}
+        name="Order"
+        component={Order}
         options={{
           headerShown: false,
           tabBarLabel: 'Pedidos',

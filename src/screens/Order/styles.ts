@@ -23,10 +23,7 @@ export const Card = styled.View`
 `;
 
 export const Botton = styled.TouchableOpacity`
-    margin-left: 338px;
+    margin-left: 335px;
     width: 32px;
     height: 35px;
-    border-radius: 9px;
-    border-width: 1px;
-    border-color: 'red';
 `;

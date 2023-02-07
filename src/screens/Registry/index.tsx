@@ -2,6 +2,7 @@ import {useNavigation} from '@react-navigation/native';
 import React, {useState} from 'react';
 import {View} from 'react-native';
 import BouncyCheckbox from 'react-native-bouncy-checkbox';
+import {api} from '../../libs/api';
 import {propsStack} from '../../routes/tab.routes';
 import themes from '../../theme/themes';
 
@@ -15,33 +16,53 @@ import {
 } from './styles';
 
 export function Registry() {
-  const [numRequest, setNumRequest] = useState('');
+  const [numOrder, setNumOrder] = useState<number>();
   const [nameClient, setNameClient] = useState('');
-  const [numTable, setNumTable] = useState('');
-  const [requests, setRequests] = useState('');
+  const [numTable, setNumTable] = useState<number>();
+  const [order, setOrder] = useState('');
   const [isChecked, setIsChecked] = useState(false);
+  const [isSendingOrder, setIsSendingOrder] = useState(false);
 
-  const navigation = useNavigation<propsStack>();
-
-  const request = () => {
-    if (numRequest && nameClient && numTable && requests && isChecked) {
-      navigation.navigate('Requests');
+  async function handleSendOrder() {
+    if (isSendingOrder) {
+      return;
     }
-  };
-
+    setIsSendingOrder(true);
+    try {
+      await api.post('/orderManagement', {
+        num_order: numOrder,
+        name_client: nameClient,
+        num_table: numTable,
+        order: order,
+        type: isChecked,
+      });
+    } catch (error) {
+      console.log(error);
+      setIsSendingOrder(false);
+    }
+  }
   return (
     <Container>
       <Title>Registro de Pedidos</Title>
       <Input
         placeholder="Numero do Pedido"
-        onChangeText={setNumRequest}></Input>
-      <Input placeholder="Nome do Cliente" onChangeText={setNameClient}></Input>
-      <Input placeholder="Numero da Mesa" onChangeText={setNumTable}></Input>
+        onChangeText={setNumOrder}
+        keyboardType="numeric"
+        value={numOrder}></Input>
+      <Input
+        placeholder="Nome do Cliente"
+        onChangeText={setNameClient}
+        value={nameClient}></Input>
+      <Input
+        placeholder="Numero da Mesa"
+        onChangeText={setNumTable}
+        keyboardType="numeric"
+        value={numTable}></Input>
       <InputRegistry
         multiline={true}
         blurOnSubmit={true}
         placeholder="Registre seu Pedido"
-        onChangeText={setRequests}></InputRegistry>
+        onChangeText={setOrder}></InputRegistry>
       <View>
         <BouncyCheckbox
           style={{padding: 10}}
@@ -65,7 +86,7 @@ export function Registry() {
         />
       </View>
       <Botton>
-        <BottonTitle onPress={request}>Adicionar</BottonTitle>
+        <BottonTitle onPress={handleSendOrder}>Adicionar</BottonTitle>
       </Botton>
     </Container>
   );
