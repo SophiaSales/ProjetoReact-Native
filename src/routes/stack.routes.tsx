@@ -4,10 +4,12 @@ import {
   NativeStackNavigationProp,
 } from '@react-navigation/native-stack';
 import {SignIn} from '../screens/SignIn';
+import {Register} from '../screens/Register';
 import {TabRoutes} from './tab.routes';
 
 export type propsNavigation = {
   SignIn: undefined;
+  Register: undefined;
   TabRoutes: undefined;
 };
 export type propsStack = NativeStackNavigationProp<propsNavigation>;
@@ -20,6 +22,11 @@ export function StackRoutes() {
       <Stack.Screen
         name="SignIn"
         component={SignIn}
+        options={{headerShown: false}}
+      />
+      <Stack.Screen
+        name="Register"
+        component={Register}
         options={{headerShown: false}}
       />
       <Stack.Screen

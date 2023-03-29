@@ -6,7 +6,6 @@ export const Container = styled.View`
     justify-content: center;
     background-color: ${({ theme }) => theme.COLORS.PRIMARY1};
 `;
-
 export const Box = styled.View`
     background-color: ${({ theme }) => theme.COLORS.INPUT2};
     padding: 50px;
@@ -22,7 +21,6 @@ export const Title = styled.Text`
     margin-bottom: 15px;
     color: ${({ theme }) => theme.COLORS.PRIMARY2};
 `;
-
 export const Input = styled.TextInput`
     width: 190px;
     height: 50px;

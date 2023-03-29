@@ -33,8 +33,8 @@ export function TabRoutes() {
         options={{
           headerShown: false,
           tabBarLabel: 'Registro',
-          tabBarIcon: ({color, size}) => (
-            <MaterialIcons name="post-add" color={color} size={size} />
+          tabBarIcon: ({color}) => (
+            <MaterialIcons name="post-add" color={color} size={32} />
           ),
         }}
       />
@@ -44,8 +44,9 @@ export function TabRoutes() {
         options={{
           headerShown: false,
           tabBarLabel: 'Pedidos',
-          tabBarIcon: ({color, size}) => (
-            <MaterialIcons name="article" color={color} size={size} />
+          tabBarStyle: {},
+          tabBarIcon: ({color}) => (
+            <MaterialIcons name="article" color={color} size={30} />
           ),
         }}
       />
