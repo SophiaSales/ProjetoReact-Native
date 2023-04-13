@@ -1,11 +1,14 @@
 const express = require("express");
+const dbConnection = require("./config/dbConnection");
 const server = express();
-const routes = require("./routes/routes");
+const ordersRoutes = require("./routes/ordersRoutes");
+const usersRoutes = require("./routes/usersRoutes");
 const PORT = 3000;
 const local = "[Server]";
 
 server.use(express.json());
-server.use(routes);
+server.use(ordersRoutes);
+server.use(usersRoutes);
 
 try {
     server.listen(PORT, () => {
