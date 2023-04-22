@@ -25,6 +25,14 @@ class Users {
             console.error(`${local} - Error: `, error);
         }
     }
+
+    async getUsers () {
+        try {
+            return await usersCollection.find({});
+        } catch (error) {
+            console.error(`${local} - Error: `, error)
+        }
+    }
 }
 
 module.exports = new Users();

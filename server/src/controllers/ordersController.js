@@ -24,6 +24,14 @@ class Orders {
             console.error(`${local} - Error: `, error);
         }
     }
+
+    async getOrders () {
+        try {
+            return await ordersCollection.find({});
+        } catch (error) {
+            console.error(`${local} - Error: `, error.message);
+        }
+    }
 }
 
 module.exports = new Orders();

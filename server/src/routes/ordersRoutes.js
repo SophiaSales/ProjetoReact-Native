@@ -24,7 +24,7 @@ router.post("/orders", async (req, res) => {
     }
 });
 
-router.get("/orders", async (req, res) => {
+router.get("/orders/orderNumber", async (req, res) => {
     const orderNumber = req.body.orderNumber;
     try {
         const result = await ordersController.findOrder(orderNumber);
@@ -37,6 +37,21 @@ router.get("/orders", async (req, res) => {
     } catch (error) {
         res.status(500).send({message: "Internal server error."});
         console.error(`${local} - Error: `, error);
+    }
+});
+
+router.get("/orders", async (req, res) => {
+    try {
+        const result = await ordersController.getOrders();
+        const resultIsNotEmpty = helperService.isArrayNotEmpty(result);
+        if (resultIsNotEmpty == false) {
+            res.status(404).send({message: "Orders do not exist"});
+            return
+        }
+        res.status(200).json(result);
+    } catch (error) {
+        res.status(500).send({message: "Internal server error"});
+        console.error(`${local} - Error: `, error.message);
     }
 });
 
