@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 const local = "[DB-Connection]";
-mongoose.promise = global.Promise;
+mongoose.Promise = global.Promise;
 
 const dbConnect = async (uri) => {
     try {

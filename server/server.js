@@ -14,7 +14,7 @@ server.use(usersRoutes);
 
 const serverConfig = async (uri) => {
     try {
-        const isDbConnected = await database.runDatabaseConnection(process.env.DATABASE_STRING);
+        const isDbConnected = await database.runDatabaseConnection(uri);
         if (isDbConnected == true) {
             server.listen(PORT, () => {
                 console.log(`${local} - Runing on port ${PORT}`);
