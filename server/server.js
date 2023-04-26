@@ -4,15 +4,16 @@ const dbConnection = require("./src/config/dbConnection");
 const server = express();
 const ordersRoutes = require("./src/routes/ordersRoutes");
 const usersRoutes = require("./src/routes/usersRoutes");
-const loginRoutes = require("./src/routes/loginRoutes");
+const sessionRoutes = require("./src/routes/sessionRoutes");
 const database = require("./src/config/dbConnection");
 const PORT = 3000;
-const local = "[Server]";
+const local = "[SERVER]";
 
+// routes middlewares
 server.use(express.json());
 server.use(ordersRoutes);
 server.use(usersRoutes);
-server.use(loginRoutes);
+server.use(sessionRoutes);
 
 const serverConfig = async (uri) => {
     try {

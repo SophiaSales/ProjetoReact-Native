@@ -1,6 +1,6 @@
 const usersCollection = require("../models/Users");
 const helperService = require("../helpers/validationHelper");
-const local = "[Users controller]";
+const local = "[USERS-CONTROLLER]";
 
 class Users {
 
@@ -9,12 +9,12 @@ class Users {
             const userExists = await this.findUser(user.email);
             const userIsObject = helperService.isObjectNotEmpty(userExists);
             if (userIsObject == true) {
-                const error = new Error("User already exists.");
-                return error.message;
+                return { message: "User already exists." }
             }
             return await usersCollection.create(user);
         } catch (error) {
             console.error(`${local} - Error: `, error);
+            throw new Error("Failed to create user");
         }
     }
 
@@ -23,6 +23,7 @@ class Users {
             return await usersCollection.findOne({ email: email });
         } catch (error) {
             console.error(`${local} - Error: `, error);
+            throw new Error("Failed to find user.");
         }
     }
 
@@ -30,7 +31,8 @@ class Users {
         try {
             return await usersCollection.find({});
         } catch (error) {
-            console.error(`${local} - Error: `, error)
+            console.error(`${local} - Error: `, error);
+            throw new Error("Failed to return all users.");
         }
     }
 }

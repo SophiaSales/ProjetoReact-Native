@@ -1,6 +1,6 @@
 const ordersCollection = require("../models/Orders");
 const helperService = require("../helpers/validationHelper");
-const local = "[Orders controller]";
+const local = "[ORDERS-CONTROLLER]";
 class Orders {
 
     async createNewOrder (order) {

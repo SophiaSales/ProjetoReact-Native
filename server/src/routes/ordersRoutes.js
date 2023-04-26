@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 const ordersController = require("../controllers/ordersController");
 const helperService = require("../helpers/validationHelper");
-const local = "[Routes]";
+const local = "[ORDERS-ROUTER]";
 
 router.post("/orders", async (req, res) => {
     const order = {
