@@ -15,7 +15,6 @@ export const Title = styled.Text`
 `;
 
 export const Card = styled.View`
-    align-items: flex-end;
     background-color: ${({ theme }) => theme.COLORS.INPUT2};
     width: 370px;
     height: 150px;
