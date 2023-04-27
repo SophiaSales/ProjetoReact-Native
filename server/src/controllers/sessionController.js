@@ -10,6 +10,7 @@ class Session {
             return crypto.randomBytes(64).toString("hex");
         } catch (error) {
             console.error(`${local} - Failed trying to create secret key: `, error);
+            throw new Error("Failed to create secret key.");
         }
     }
 
@@ -18,6 +19,7 @@ class Session {
             return jwt.sign({ userID: userID }, secretKey);
         } catch (error) {
             console.error(`${local} - Failed trying go create token: `, error);
+            throw new Error("Failed to create token.");
         }
     }
 
@@ -27,6 +29,7 @@ class Session {
             return isValidPassword;
         } catch (error) {
             console.error(`${local} - Failed trying to validate password: `, error);
+            throw new Error("Failed to validate password")
         }
     }
 
@@ -35,6 +38,7 @@ class Session {
             return await bcrypt.hash(password, 10);
         } catch (error) {
             console.error(`${local} - Failed trying to hash user password: `, error);
+            throw new Error("Failed to hash password.");
         }
     }
 
@@ -43,6 +47,7 @@ class Session {
             return jwt.verify(token, secretKey);
         } catch (error) {
             console.error(`${local} - Failed trying to validate token: `, error);
+            throw new Error("Failed to validate token.");
         }
     }
 }

@@ -8,12 +8,12 @@ class Orders {
             const orderExists = await this.findOrder(order.orderNumber);
             const orderIsObject = helperService.isObjectNotEmpty(orderExists);
             if (orderIsObject == true) {
-                const error = new Error("Order number already exists");
-                return error.message;
+                return { message: "Order already exists" };
             }
             return await ordersCollection.create(order);
         } catch (error) {
-            console.error(`${error.message}`)
+            console.error(`${error.message}`);
+            throw new Error("Failed to create a new order.");
         }
     }
 
@@ -22,6 +22,7 @@ class Orders {
             return await ordersCollection.findOne({orderNumber: orderNumber});
         } catch (error) {
             console.error(`${local} - Error: `, error);
+            throw new Error("Failed to find order.");
         }
     }
 
@@ -30,6 +31,7 @@ class Orders {
             return await ordersCollection.find({});
         } catch (error) {
             console.error(`${local} - Error: `, error.message);
+            throw new Error("Failed to get orders.");
         }
     }
 }

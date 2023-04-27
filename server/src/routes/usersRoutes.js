@@ -11,10 +11,11 @@ router.get("/user/:userEmail", async (req, res) => {
         const resultIsObject = helperService.isObjectNotEmpty(result);
         if (resultIsObject == false) {
             res.status(404).send({message: "User not founded."});
+            return;
         }
-        res.status(200).json(result);
+        res.status(200).send(result);
     } catch (error) {
-        res.status(500).send({message: "Internal server error."});
+        res.status(500).send({message: `Internal server error: ${error.message}`});
         console.error(`${local} - Error: `, error);
     }
 });
@@ -25,8 +26,9 @@ router.get("/users", async (req, res) => {
         const resultIsArray = helperService.isArrayNotEmpty(result);
         if (resultIsArray == false) {
             res.status(404).send({ message: "users not founded" });
+            return;
         }
-        res.status(200).json(result);
+        res.status(200).send(result);
     } catch (error) {
         console.error(`${local} - Error: `, error);
         res.status(500).send({ message: "Internal server error." });

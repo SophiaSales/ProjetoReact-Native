@@ -16,14 +16,20 @@ router.post("/register", async (req, res) => {
         user.password = hashedPassword;
         const result = await usersController.createNewUser(user);
         const resultNotEmpty = helperService.isObjectNotEmpty(result);
+        
+        if (result.message) {
+            res.status(409).send(result);
+            return;
+        }
+
         if (resultNotEmpty == false) {
             res.status(400).send({ message: "Failed trying to create a new user" });
             return;
         }
-        res.status(200).json(result);
+        res.status(200).send(result);
     } catch (error) {
-        res.status(500).send({ message: "Internal server error" });
-        console.error(`${local} - Error: `, error.message);
+        res.status(500).send({ message: `Internal server error: ${error.message}` });
+        console.error(`${local} - Error: `, error);
     }
 });
 
@@ -56,10 +62,10 @@ router.post("/login", async (req, res) => {
             return;
         }
 
-        res.status(200).json({ user, token });
+        res.status(200).send({ user, token });
     } catch (error) {
-        res.status(500).send({message: "Internal server error."});
-        console.error(`${local} - Error: `, error.message);
+        res.status(500).send({message: `Internal server error: ${error.message}`});
+        console.error(`${local} - Error: `, error);
     }
 });
 
