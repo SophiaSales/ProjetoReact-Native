@@ -1,5 +1,5 @@
-const usersAPI = require("./users");
-const ordersAPI = require("./orders");
+const usersAPI = require("./Users");
+const ordersAPI = require("./Orders");
 const local = "[API-MAIN]";
 
 const getUsers = async () => {
@@ -20,10 +20,22 @@ const getOrders = async () => {
     }
 }
 
+const signIN = async () => {
+    try {
+        const user = {
+            email: "wilman817@gmail.com",
+            password: "BANANAbanana@#2023",
+        }
+        const response = await usersAPI.login(user);
+        console.log("User login result: ", response.data);
+    } catch (error) {
+        console.error(`${local} - Error: `, error.message);
+    }
+}
+
 const main = async () => {
     try {
-        await getUsers();
-        await getOrders();
+        await signIN();
     } catch (error) {
         console.error(`${local} - Failed on main function: `, error.message);
     }
