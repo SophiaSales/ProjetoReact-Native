@@ -11,6 +11,31 @@ export function Register() {
   const [data, setData] = useState();
   const [error, setError] = useState('');
   const getUsers = async () => {
+    if (name === '') {
+      setError;
+      setError('Por favor, preencha o campo de nome.');
+      return;
+    }
+    if (email === '') {
+      setError;
+      setError('Por favor, preencha o campo de email.');
+      return;
+    }
+    if (password === '') {
+      setError;
+      setError('Por favor, preencha o campo de senha.');
+      return;
+    }
+    if (confirmPassword === '') {
+      setError;
+      setError('Por favor, preencha o campo de confirmação de senha.');
+      return;
+    }
+    if (password !== confirmPassword) {
+      setError;
+      setError('A senha e a confirmação de senha não correspondem.');
+      return;
+    }
     try {
       const response = await api.post('/register', {
         email: email,
