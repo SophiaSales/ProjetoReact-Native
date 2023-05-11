@@ -13,13 +13,3 @@ export const Title = styled.Text`
     margin-bottom: 10px;
     text-align: center;
 `;
-
-export const Card = styled.View`
-    background-color: ${({ theme }) => theme.COLORS.INPUT2};
-    width: 370px;
-    height: 150px;
-    border-radius: 10px;
-    border-width: 1px;
-    border-color: ${({ theme }) => theme.COLORS.INPUT1};
-    margin-bottom: 30px
-`;

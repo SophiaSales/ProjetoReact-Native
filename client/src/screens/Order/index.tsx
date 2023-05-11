@@ -1,7 +1,8 @@
 import React, {useEffect, useState} from 'react';
 import {CardOrder} from '../../components/CardOrder';
-import {Card, Container, Title} from './styles';
+import {Container, Title} from './styles';
 import {api} from '../../libs/api';
+import {ScrollView} from 'react-native';
 
 type OrderType = {
   orderNumber: number;
@@ -28,15 +29,17 @@ export const Order = () => {
   return (
     <Container>
       <Title>Pedidos</Title>
-      <Card>
+      <ScrollView>
         {data.map(item => (
-          <CardOrder
-            num={item.orderNumber}
-            client={item.orderOwner}
-            orders={item.orderItems}
-          />
+          <React.Fragment key={item.orderNumber}>
+            <CardOrder
+              num={item.orderNumber}
+              client={item.orderOwner}
+              orders={item.orderItems}
+            />
+          </React.Fragment>
         ))}
-      </Card>
+      </ScrollView>
     </Container>
   );
 };
