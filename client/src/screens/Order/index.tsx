@@ -1,8 +1,8 @@
 import React, {useEffect, useState} from 'react';
 import {CardOrder} from '../../components/CardOrder';
 import {Container, Title} from './styles';
-import {api} from '../../libs/api';
 import {ScrollView} from 'react-native';
+import OrdersAPI from '../../API/Orders';
 
 type OrderType = {
   orderNumber: number;
@@ -13,17 +13,18 @@ type OrderType = {
 export const Order = () => {
   const [data, setData] = useState<OrderType[]>([]);
 
-  const getOrders = async () => {
+  const OrdersScreen = async () => {
     try {
-      const response = await api.get('/orders');
-      console.log(response.data);
+      const response = await OrdersAPI.getOrders();
+      console.log('response data', response.data);
       setData(response.data);
-    } finally {
+    } catch (error) {
+      console.error('Error: ', error);
     }
   };
 
   useEffect(() => {
-    getOrders();
+    OrdersScreen();
   }, []);
 
   return (
