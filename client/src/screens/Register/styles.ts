@@ -17,8 +17,9 @@ export const Box = styled.View`
 `;
 
 export const Title = styled.Text`
-    font-size: 21px;
-    margin-bottom: 15px;
+    font-size: 25px;
+    font-weight: 600;
+    margin-bottom: 10px;
     color: ${({ theme }) => theme.COLORS.PRIMARY2};
 `;
 export const Input = styled.TextInput`
@@ -32,18 +33,32 @@ export const Input = styled.TextInput`
     margin-bottom: 10px;
     justify-content: space-around;
     font-size: 20px;
+    font-weight: 500;
     color: ${({ theme }) => theme.COLORS.TEXT};
 `;
+export const TextError = styled.Text`
+    color: ${({ theme }) => theme.COLORS.TEXTERROR};
+    font-size: 15px;
+    font-weight: 400;
+    margin-bottom: 10px;
+`
+export const TextSuccess = styled.Text`
+    color: ${({ theme }) => theme.COLORS.TEXTSUCCESS};
+    font-size: 15px;
+    font-weight: 400;
+    margin-top: 10px;
+    margin-bottom: 10px;
+`
 export const Botton = styled.TouchableOpacity`
     width: 200px;
     height: 35px;
-    margin-top: 20px;
     background-color: ${({ theme }) => theme.COLORS.PRIMARY2};
     align-items: center;
     justify-content: center;
     border-radius: 4px;
 `;
 export const BottonTitle = styled.Text`
-    font-size: 19px;
+    font-size: 20px;
+    font-weight: 600;
     color: ${({ theme }) => theme.COLORS.INPUT2};
 `;

@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import {CardOrder} from '../../components/CardOrder';
 import {Container, Title} from './styles';
-import {ScrollView} from 'react-native';
+import {ScrollView, RefreshControl} from 'react-native';
 import OrdersAPI from '../../API/Orders';
 
 type OrderType = {
@@ -12,6 +12,7 @@ type OrderType = {
 
 export const Order = () => {
   const [data, setData] = useState<OrderType[]>([]);
+  const [refreshing, setRefreshing] = useState(false);
 
   const OrdersScreen = async () => {
     try {
@@ -23,6 +24,23 @@ export const Order = () => {
     }
   };
 
+  const handleRefresh = () => {
+    setRefreshing(true);
+    fetchData();
+  };
+
+  const fetchData = async () => {
+    try {
+      const response = await OrdersAPI.getOrders();
+      console.log('response data', response.data);
+      setData(response.data);
+      setRefreshing(false);
+    } catch (error) {
+      console.error('Error: ', error);
+      setRefreshing(false);
+    }
+  };
+
   useEffect(() => {
     OrdersScreen();
   }, []);
@@ -30,7 +48,10 @@ export const Order = () => {
   return (
     <Container>
       <Title>Pedidos</Title>
-      <ScrollView>
+      <ScrollView
+        refreshControl={
+          <RefreshControl refreshing={refreshing} onRefresh={handleRefresh} />
+        }>
         {data.map(item => (
           <React.Fragment key={item.orderNumber}>
             <CardOrder

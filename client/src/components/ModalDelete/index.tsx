@@ -5,35 +5,48 @@ import themes from '../../theme/themes';
 
 import {ModalStyle, ModalTitle, ButtonStyle} from './styles';
 
-export function ModalDelete() {
-  const [visivel, setVisivel] = useState(false);
+type ModalDeleteProps = {
+  onHide: () => void;
+};
+
+export function ModalDelete(props: ModalDeleteProps) {
+  const [visible, setVisible] = useState(false);
+
+  const closeModal = () => {
+    setVisible(false);
+  };
+
+  const confirmAction = () => {
+    props.onHide(); // Chamada da função onHide para ocultar o card
+    setVisible(false);
+  };
+
   return (
     <View>
-      <Modal animationType="slide" transparent={true} visible={visivel}>
+      <Modal animationType="slide" transparent={true} visible={visible}>
         <ModalStyle>
-          <ModalTitle>Apagar pedido?</ModalTitle>
+          <View
+            style={{
+              justifyContent: 'flex-end',
+              flexDirection: 'row',
+            }}>
+            <ModalTitle>O pedido foi entregue?</ModalTitle>
+            <TouchableOpacity onPress={closeModal}>
+              <Text>
+                <MaterialIcons name="clear" color={'#F08080'} size={30} />
+              </Text>
+            </TouchableOpacity>
+          </View>
           <ButtonStyle>
             <Button
-              title="Cancelar"
+              title="Confirmar"
               color={themes.COLORS.PRIMARY2}
-              onPress={() => {
-                setVisivel(false);
-              }}
-            />
-            <Button
-              title="Apagar"
-              color={themes.COLORS.PRIMARY2}
-              onPress={() => {
-                setVisivel(false);
-              }}
+              onPress={confirmAction}
             />
           </ButtonStyle>
         </ModalStyle>
       </Modal>
-      <TouchableOpacity
-        onPress={() => {
-          setVisivel(true);
-        }}>
+      <TouchableOpacity onPress={() => setVisible(true)}>
         <Text>
           <MaterialIcons name="clear" color={'#F08080'} size={30} />
         </Text>

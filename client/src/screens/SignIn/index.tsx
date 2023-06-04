@@ -4,6 +4,7 @@ import {useNavigation} from '@react-navigation/native';
 
 import {propsStack} from '../../routes/stack.routes';
 import {Text, TouchableOpacity} from 'react-native';
+import Users from '../../API/Users';
 
 export function SignIn() {
   const [user, setUser] = useState('');
@@ -29,9 +30,6 @@ export function SignIn() {
           secureTextEntry
           placeholder="Senha"
           onChangeText={setPassword}></Input>
-        <TouchableOpacity>
-          <Text style={{color: 'red'}}>Esqueceu a senha?</Text>
-        </TouchableOpacity>
         <Botton onPress={logged}>
           <BottonTitle>Login</BottonTitle>
         </Botton>

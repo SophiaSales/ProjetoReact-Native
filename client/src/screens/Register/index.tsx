@@ -1,7 +1,15 @@
-import React, {useEffect, useState} from 'react';
-import {Container, Box, Input, Title, Botton, BottonTitle} from './styles';
+import React, {useState} from 'react';
+import {
+  Container,
+  Box,
+  Input,
+  Title,
+  Botton,
+  BottonTitle,
+  TextError,
+  TextSuccess,
+} from './styles';
 import UsersAPI from '../../API/Users';
-import {Text} from 'react-native';
 
 export function Register() {
   const [name, setName] = useState('');
@@ -15,8 +23,16 @@ export function Register() {
   const [errorPassword, setErrorPassword] = useState('');
   const [errorConfirmPassword, setErrorConfirmPassword] = useState('');
   const [errorMatch, setErrorMatch] = useState('');
+  const [successMessage, setSuccessMessage] = useState('');
 
   const handleRegister = async () => {
+    setSuccessMessage('');
+    setErrorName('');
+    setErrorEmail('');
+    setErrorPassword('');
+    setErrorConfirmPassword('');
+    setErrorMatch('');
+    setError('');
     let isValid = true;
 
     if (name === '') {
@@ -43,6 +59,12 @@ export function Register() {
       try {
         const response = await UsersAPI.postUsers(email, password);
         setData(response.data);
+        setSuccessMessage('Cadastro realizado com sucesso!');
+        setName('');
+        setEmail('');
+        setPassword('');
+        setConfirmPassword('');
+        setError('');
       } catch (error) {
         setError(
           'Erro durante o cadastro do usuário. Por favor, tente novamente.',
@@ -56,29 +78,33 @@ export function Register() {
     <Container>
       <Box>
         <Title>Cadastre-se</Title>
-        <Input placeholder="Nome" onChangeText={setName}></Input>
-        {errorName !== '' && <Text style={{color: 'red'}}>{errorName}</Text>}
-        <Input placeholder="Email" onChangeText={setEmail}></Input>
-        {errorEmail !== '' && <Text style={{color: 'red'}}>{errorEmail}</Text>}
+        <Input placeholder="Nome" onChangeText={setName} value={name}></Input>
+        {errorName !== '' && <TextError>{errorName}</TextError>}
+        <Input
+          placeholder="Email"
+          onChangeText={setEmail}
+          value={email}></Input>
+        {errorEmail !== '' && <TextError>{errorEmail}</TextError>}
         <Input
           placeholder="Senha"
           secureTextEntry
-          onChangeText={setPassword}></Input>
-        {errorPassword !== '' && (
-          <Text style={{color: 'red'}}>{errorPassword}</Text>
-        )}
+          onChangeText={setPassword}
+          value={password}></Input>
+        {errorPassword !== '' && <TextError>{errorPassword}</TextError>}
         <Input
           placeholder="Confirme Senha"
           secureTextEntry
-          onChangeText={setConfirmPassword}></Input>
+          onChangeText={setConfirmPassword}
+          value={confirmPassword}></Input>
         {errorConfirmPassword !== '' && (
-          <Text style={{color: 'red'}}>{errorConfirmPassword}</Text>
+          <TextError>{errorConfirmPassword}</TextError>
         )}
-        {errorMatch !== '' && <Text style={{color: 'red'}}>{errorMatch}</Text>}
-        {error !== '' && <Text style={{color: 'red'}}>{error}</Text>}
+        {errorMatch !== '' && <TextError>{errorMatch}</TextError>}
+        {error !== '' && <TextError>{error}</TextError>}
         <Botton onPress={handleRegister}>
           <BottonTitle>Cadastrar</BottonTitle>
         </Botton>
+        {successMessage !== '' && <TextSuccess>{successMessage}</TextSuccess>}
       </Box>
     </Container>
   );

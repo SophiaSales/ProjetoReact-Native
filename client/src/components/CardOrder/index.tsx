@@ -1,26 +1,28 @@
-import React from 'react';
-import {Card} from './styles';
+import React, {useState} from 'react';
+import {Card, TextNum, TextClient, TextOrder} from './styles';
 import {ModalDelete} from '../ModalDelete';
-import {Text, View} from 'react-native';
+import {View} from 'react-native';
 
 export function CardOrder(props: any) {
+  const [cardVisible, setCardVisible] = useState(true);
+
+  const hideCard = () => {
+    setCardVisible(false);
+  };
   return (
-    <Card>
-      <View>
-        <Text style={{fontSize: 20, marginLeft: 10, marginTop: 10}}>
-          Pedido: {props.num}
-        </Text>
-        <Text style={{fontSize: 17, marginLeft: 25}}>
-          Cliente: {props.client}
-        </Text>
-        <Text style={{fontSize: 17, marginLeft: 25}}>
-          {' '}
-          Itens: {props.orders}
-        </Text>
-      </View>
-      <View>
-        <ModalDelete />
-      </View>
-    </Card>
+    <>
+      {cardVisible && (
+        <Card>
+          <View>
+            <TextNum>Pedido: {props.num}</TextNum>
+            <TextClient>Cliente: {props.client}</TextClient>
+            <TextOrder>Itens: {props.orders}</TextOrder>
+          </View>
+          <View>
+            <ModalDelete onHide={hideCard} />
+          </View>
+        </Card>
+      )}
+    </>
   );
 }

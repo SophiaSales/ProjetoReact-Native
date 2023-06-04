@@ -18,7 +18,8 @@ export const Box = styled.View`
 `;
 
 export const Title = styled.Text`
-    font-size: 21px;
+    font-size: 25px;
+    font-weight: 600;
     margin-bottom: 15px;
     color: ${({ theme }) => theme.COLORS.PRIMARY2};
 `;
@@ -34,6 +35,7 @@ export const Input = styled.TextInput`
     margin-bottom: 10px;
     justify-content: space-around;
     font-size: 20px;
+    font-weight: 500;
     color: ${({ theme }) => theme.COLORS.TEXT};
 `;
 export const Botton = styled.TouchableOpacity`
@@ -46,6 +48,7 @@ export const Botton = styled.TouchableOpacity`
     border-radius: 4px;
 `;
 export const BottonTitle = styled.Text`
-    font-size: 19px;
+    font-size: 20px;
+    font-weight: 600;
     color: ${({ theme }) => theme.COLORS.INPUT2};
 `;
