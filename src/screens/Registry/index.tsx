@@ -1,11 +1,5 @@
-import {useNavigation} from '@react-navigation/native';
 import React, {useState} from 'react';
-import {View} from 'react-native';
-import BouncyCheckbox from 'react-native-bouncy-checkbox';
-import {api} from '../../libs/api';
-import {propsStack} from '../../routes/tab.routes';
-import themes from '../../theme/themes';
-
+import RegistryOrders from '../../API/RegistryOrders';
 import {
   Botton,
   BottonTitle,
@@ -13,32 +7,35 @@ import {
   Input,
   InputRegistry,
   Title,
+  SuccessMessage,
+  ErrorMessage,
 } from './styles';
-
 export function Registry() {
-  const [numOrder, setNumOrder] = useState<number>();
-  const [nameClient, setNameClient] = useState('');
-  const [numTable, setNumTable] = useState<number>();
-  const [order, setOrder] = useState('');
-  const [isChecked, setIsChecked] = useState(false);
-  const [isSendingOrder, setIsSendingOrder] = useState(false);
+  const [orderNumber, setOrderNumber] = useState<number>();
+  const [orderOwner, setOrderOwner] = useState('');
+  const [orderItems, setOrderItems] = useState([]);
+  const [data, setData] = useState<any>(null);
+  const [error, setError] = useState('');
+  const [successMessage, setSuccessMessage] = useState('');
 
   async function handleSendOrder() {
-    if (isSendingOrder) {
-      return;
-    }
-    setIsSendingOrder(true);
+    setSuccessMessage('');
+    setError('');
     try {
-      await api.post('/orderManagement', {
-        num_order: numOrder,
-        name_client: nameClient,
-        num_table: numTable,
-        order: order,
-        type: isChecked,
-      });
+      const response = await RegistryOrders.postRegistryOrders(
+        orderNumber,
+        orderOwner,
+        orderItems,
+      );
+      setData(response.data);
+      setSuccessMessage('Pedido Registrado com Sucesso!');
+      setOrderNumber(undefined);
+      setOrderOwner('');
+      setOrderItems([]);
     } catch (error) {
       console.log(error);
-      setIsSendingOrder(false);
+      setError('Erro durante o cadastro do Pedido.');
+      console.error('Erro durante a chamada à API:', error);
     }
   }
   return (
@@ -46,45 +43,23 @@ export function Registry() {
       <Title>Registro de Pedidos</Title>
       <Input
         placeholder="Numero do Pedido"
-        onChangeText={setNumOrder}
+        onChangeText={setOrderNumber}
         keyboardType="numeric"
-        value={numOrder}></Input>
+        value={orderNumber}></Input>
       <Input
         placeholder="Nome do Cliente"
-        onChangeText={setNameClient}
-        value={nameClient}></Input>
-      <Input
-        placeholder="Numero da Mesa"
-        onChangeText={setNumTable}
-        keyboardType="numeric"
-        value={numTable}></Input>
+        onChangeText={setOrderOwner}
+        value={orderOwner}></Input>
       <InputRegistry
         multiline={true}
         blurOnSubmit={true}
         placeholder="Registre seu Pedido"
-        onChangeText={setOrder}></InputRegistry>
-      <View>
-        <BouncyCheckbox
-          style={{padding: 10}}
-          size={20}
-          fillColor={themes.COLORS.PRIMARY2}
-          unfillColor={themes.COLORS.INPUT2}
-          text="Para viajem"
-          iconStyle={{borderColor: 'gray', borderRadius: 2}}
-          textStyle={{textDecorationLine: 'none'}}
-          onPress={() => setIsChecked(!isChecked)}
-        />
-        <BouncyCheckbox
-          style={{padding: 10}}
-          size={20}
-          fillColor={themes.COLORS.PRIMARY2}
-          unfillColor={themes.COLORS.INPUT2}
-          text="Comer no local"
-          iconStyle={{borderColor: 'gray', borderRadius: 2}}
-          textStyle={{textDecorationLine: 'none'}}
-          onPress={() => setIsChecked(!isChecked)}
-        />
-      </View>
+        value={orderItems}
+        onChangeText={setOrderItems}></InputRegistry>
+      {successMessage !== '' && (
+        <SuccessMessage>{successMessage}</SuccessMessage>
+      )}
+      {error !== '' && <ErrorMessage>{error}</ErrorMessage>}
       <Botton>
         <BottonTitle onPress={handleSendOrder}>Adicionar</BottonTitle>
       </Botton>
